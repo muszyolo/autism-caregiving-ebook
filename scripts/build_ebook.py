@@ -90,6 +90,8 @@ def split_sections(blocks: list[tuple[str, str]]) -> list[dict[str, object]]:
     current: dict[str, object] | None = None
 
     for kind, content in blocks:
+        if kind == "h1":
+            continue
         if kind == "h2":
             if current:
                 sections.append(current)
@@ -100,7 +102,7 @@ def split_sections(blocks: list[tuple[str, str]]) -> list[dict[str, object]]:
             }
             continue
         if current is None:
-            current = {"title": "Overview", "id": "overview", "blocks": []}
+            continue
         current["blocks"].append((kind, content))
 
     if current:
@@ -324,6 +326,10 @@ def build_site() -> None:
         color: var(--muted);
         font-size: 1.08rem;
       }}
+      .hero-meta {{
+        margin-top: 10px !important;
+        font-size: 0.98rem !important;
+      }}
       .actions {{
         display: flex;
         flex-wrap: wrap;
@@ -343,6 +349,28 @@ def build_site() -> None:
       .button.secondary {{
         background: transparent;
         color: var(--ink);
+      }}
+      .highlights {{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }}
+      .highlight-card {{
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: rgba(255, 253, 248, 0.88);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }}
+      .highlight-card strong {{
+        display: block;
+        font-size: 2rem;
+        line-height: 1;
+        margin-bottom: 6px;
+      }}
+      .highlight-card span {{
+        color: var(--muted);
+        font-size: 0.98rem;
       }}
       .layout {{
         max-width: 1120px;
@@ -429,20 +457,38 @@ def build_site() -> None:
         .toc-card {{
           position: static;
         }}
+        .highlights {{
+          grid-template-columns: 1fr;
+        }}
       }}
     </style>
   </head>
   <body>
     <header class="hero">
       <div class="hero-inner">
-        <div class="eyebrow">Research Synthesis • GitHub Pages</div>
+        <div class="eyebrow">Research Synthesis • Live GitHub Page</div>
         <div>
           <h1>Autism Caregiving</h1>
-          <p>A live web edition generated from the Python ebook builder, based on 21 source articles about caregiver burden, resilience, service access, and intervention.</p>
+          <p>A polished web edition of the ebook, generated from Python and grounded in 21 research articles about caregiver burden, resilience, service access, and intervention.</p>
+          <p class="hero-meta">Prepared for muszyolo as a public research project and downloadable as both PDF and EPUB.</p>
         </div>
         <div class="actions">
           <a class="button" href="autism_caregiving_ebook.pdf">Download PDF</a>
           <a class="button secondary" href="autism_caregiving_ebook.epub">Download EPUB</a>
+        </div>
+        <div class="highlights">
+          <div class="highlight-card">
+            <strong>21</strong>
+            <span>source articles synthesized</span>
+          </div>
+          <div class="highlight-card">
+            <strong>3</strong>
+            <span>formats: web, PDF, EPUB</span>
+          </div>
+          <div class="highlight-card">
+            <strong>1</strong>
+            <span>live page for reading and sharing</span>
+          </div>
         </div>
       </div>
     </header>
