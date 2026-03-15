@@ -231,6 +231,33 @@
         font-size: 0.96rem;
       }
 
+      .map-wrap {
+        margin-top: 22px;
+        display: grid;
+        gap: 22px;
+      }
+
+      .map-card {
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: rgba(255, 252, 246, 0.84);
+        padding: 20px;
+      }
+
+      .map-card h3 {
+        margin-top: 0;
+      }
+
+      .map-frame {
+        min-height: 420px;
+      }
+
+      .map-caption {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
       code {
         font-family: Consolas, "Courier New", monospace;
         font-size: 0.95em;
@@ -331,6 +358,29 @@
               <li><code>docs/autism_caregiving_ebook.epub</code> for the EPUB download.</li>
               <li><code>output/ebook/autism_caregiving_ebook.md</code> for the manuscript text.</li>
             </ul>
+
+            <h3>World Mapping of the Paper Set</h3>
+            <p>
+              The maps below visualize the geography of the papers in this ebook collection. They show where the studies were based or led, which makes them useful for seeing the regional spread of the evidence. They do <strong>not</strong> represent global autism prevalence.
+            </p>
+
+            <div class="map-wrap">
+              <div class="map-card">
+                <h3>Map 1. Study Geography by Paper Count</h3>
+                <div id="autism-paper-map" class="map-frame"></div>
+                <p class="map-caption">
+                  Country counts are based on the source set used for this GitHub ebook. South Africa and Brazil dominate the collection, with Chile and Italy also represented.
+                </p>
+              </div>
+
+              <div class="map-card">
+                <h3>Map 2. Research Focus by Region</h3>
+                <div id="autism-theme-map" class="map-frame"></div>
+                <p class="map-caption">
+                  This view summarizes the main autism-related caregiving themes from each region, such as caregiver burden, intervention access, diagnosis timing, resilience, telerehabilitation, and family adaptation.
+                </p>
+              </div>
+            </div>
           </section>
 
           <section id="notes" class="note-card">
@@ -349,5 +399,138 @@
         Repository: <a href="https://github.com/muszyolo/autism-caregiving-ebook">muszyolo/autism-caregiving-ebook</a>
       </div>
     </div>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script>
+      const paperCounts = [
+        { country: "Brazil", iso: "BRA", papers: 9 },
+        { country: "South Africa", iso: "ZAF", papers: 9 },
+        { country: "Chile", iso: "CHL", papers: 2 },
+        { country: "Italy", iso: "ITA", papers: 1 }
+      ];
+
+      const themePoints = [
+        {
+          country: "Brazil",
+          lat: -14.2,
+          lon: -51.9,
+          size: 26,
+          color: "#d67a38",
+          label: "Brazil",
+          text: "Nine papers. Major themes: family care, parental emotions, oral health, integrative reviews, adaptation, coparenting."
+        },
+        {
+          country: "South Africa",
+          lat: -30.6,
+          lon: 22.9,
+          size: 26,
+          color: "#16324f",
+          label: "South Africa",
+          text: "Nine papers. Major themes: caregiver-mediated intervention, COVID-19 impacts, rural caregiver expectations, mealtime stress, telerehabilitation."
+        },
+        {
+          country: "Chile",
+          lat: -35.7,
+          lon: -71.5,
+          size: 18,
+          color: "#8a5a44",
+          label: "Chile",
+          text: "Two papers. Major themes: caregiver survey findings, diagnostic timing, clinical and family implications."
+        },
+        {
+          country: "Italy",
+          lat: 41.9,
+          lon: 12.5,
+          size: 16,
+          color: "#587c6c",
+          label: "Italy",
+          text: "One paper. Major themes: caregiver burden, resilience, guilt sensitivity, and support."
+        }
+      ];
+
+      Plotly.newPlot(
+        "autism-paper-map",
+        [
+          {
+            type: "choropleth",
+            locationmode: "ISO-3",
+            locations: paperCounts.map((d) => d.iso),
+            z: paperCounts.map((d) => d.papers),
+            text: paperCounts.map((d) => `${d.country}: ${d.papers} papers`),
+            colorscale: [
+              [0, "#f6d8c2"],
+              [0.5, "#d67a38"],
+              [1, "#16324f"]
+            ],
+            marker: {
+              line: {
+                color: "#f6f1e7",
+                width: 0.6
+              }
+            },
+            colorbar: {
+              title: "Paper count"
+            },
+            hovertemplate: "%{text}<extra></extra>"
+          }
+        ],
+        {
+          margin: { l: 0, r: 0, t: 10, b: 0 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          geo: {
+            projection: { type: "natural earth" },
+            showframe: false,
+            showcoastlines: false,
+            bgcolor: "rgba(0,0,0,0)",
+            landcolor: "#efe5d8",
+            showcountries: true,
+            countrycolor: "#ffffff"
+          }
+        },
+        { responsive: true, displayModeBar: false }
+      );
+
+      Plotly.newPlot(
+        "autism-theme-map",
+        [
+          {
+            type: "scattergeo",
+            mode: "markers+text",
+            lat: themePoints.map((d) => d.lat),
+            lon: themePoints.map((d) => d.lon),
+            text: themePoints.map((d) => d.label),
+            textposition: "top center",
+            hovertext: themePoints.map((d) => d.text),
+            hovertemplate: "%{hovertext}<extra></extra>",
+            marker: {
+              size: themePoints.map((d) => d.size),
+              color: themePoints.map((d) => d.color),
+              line: {
+                color: "#fffdf8",
+                width: 1.5
+              },
+              opacity: 0.95
+            }
+          }
+        ],
+        {
+          margin: { l: 0, r: 0, t: 10, b: 0 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          geo: {
+            projection: { type: "natural earth" },
+            showframe: false,
+            showcoastlines: false,
+            bgcolor: "rgba(0,0,0,0)",
+            landcolor: "#efe5d8",
+            oceancolor: "#f8f4ed",
+            showocean: true,
+            showcountries: true,
+            countrycolor: "#ffffff"
+          }
+        },
+        { responsive: true, displayModeBar: false }
+      );
+    </script>
   </body>
 </html>

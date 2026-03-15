@@ -28,3 +28,12 @@ docs/index.html
 ```
 
 No Python build step is required for the website anymore.
+
+## Mapping
+
+The HTML page now includes interactive world maps that visualize:
+
+- study geography by paper count
+- autism caregiving research themes by region
+
+These maps are based on the papers in the ebook collection and show study coverage, not global autism prevalence.
