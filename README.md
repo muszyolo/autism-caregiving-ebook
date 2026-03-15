@@ -1,25 +1,30 @@
-# Autism Caregiving Ebook
+# Autism Caregiving GitHub Ebook
 
-Live site:
+Live page:
 [https://muszyolo.github.io/autism-caregiving-ebook/](https://muszyolo.github.io/autism-caregiving-ebook/)
 
-This project turns a source-based autism caregiving ebook into a public GitHub Pages website, plus downloadable PDF and EPUB versions.
+This project now uses a direct HTML page for the GitHub ebook site.
 
-## What is included
+## Main files
 
-- `docs/index.html`: the live GitHub Pages site
-- `docs/autism_caregiving_ebook.pdf`: downloadable PDF
-- `docs/autism_caregiving_ebook.epub`: downloadable EPUB
-- `scripts/build_ebook.py`: Python builder for PDF, EPUB, and web output
-- `output/ebook/autism_caregiving_ebook.md`: manuscript source
+- `docs/index.html`: standalone HTML for the live GitHub Pages site
+- `docs/autism_caregiving_ebook.pdf`: downloadable PDF ebook
+- `docs/autism_caregiving_ebook.epub`: downloadable EPUB ebook
+- `output/ebook/autism_caregiving_ebook.md`: manuscript source text
 
-## Rebuild locally
+## Publishing
 
-```powershell
-py -3.13 scripts/build_ebook.py
+GitHub Pages serves the site from:
+
+- branch: `master`
+- folder: `/docs`
+
+## Editing
+
+To change the live page, edit:
+
+```html
+docs/index.html
 ```
 
-## Notes
-
-- GitHub Pages is configured from the `master` branch using the `docs/` folder.
-- A custom domain can be added later by creating a `docs/CNAME` file and pointing DNS to GitHub Pages.
+No Python build step is required for the website anymore.
