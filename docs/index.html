@@ -3,71 +3,60 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GitHub Ebook | Autism Caregiving</title>
+    <title>Autism Caregiving Ebook V2</title>
     <meta
       name="description"
-      content="GitHub ebook edition of Autism Caregiving, built as a standalone HTML page with downloadable PDF and EPUB files."
+      content="Version 2 of the Autism Caregiving ebook: a chapter-based HTML research synthesis built from 21 source papers."
     />
     <style>
       :root {
-        --ink: #16324f;
-        --muted: #617888;
-        --paper: #f6f1e7;
-        --card: rgba(255, 252, 246, 0.92);
-        --line: #d7cbbd;
+        --ink: #17324c;
+        --muted: #647a88;
+        --paper: #f5efe4;
+        --card: rgba(255, 252, 247, 0.94);
+        --line: #d9ccbb;
         --accent: #d67a38;
-        --shadow: 0 20px 48px rgba(22, 50, 79, 0.1);
+        --accent-soft: #f2dcc8;
+        --deep: #0f2235;
+        --shadow: 0 18px 44px rgba(23, 50, 76, 0.1);
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         margin: 0;
         color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(214, 122, 56, 0.18), transparent 28%),
-          linear-gradient(180deg, #f2eadb 0%, var(--paper) 24%, #f8f4ed 100%);
+          radial-gradient(circle at top left, rgba(214, 122, 56, 0.18), transparent 26%),
+          linear-gradient(180deg, #f2e8d8 0%, var(--paper) 22%, #f8f4ed 100%);
         font-family: Georgia, "Times New Roman", serif;
-        line-height: 1.7;
+        line-height: 1.72;
       }
 
-      a {
-        color: var(--ink);
-      }
-
-      .shell {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 28px 20px 64px;
-      }
-
+      a { color: var(--deep); }
+      code { font-family: Consolas, "Courier New", monospace; font-size: 0.95em; }
+      .page { max-width: 1220px; margin: 0 auto; padding: 24px 20px 72px; }
       .hero {
-        overflow: hidden;
         position: relative;
-        border: 1px solid rgba(22, 50, 79, 0.1);
-        border-radius: 32px;
-        padding: 34px;
+        overflow: hidden;
+        border: 1px solid rgba(23, 50, 76, 0.1);
+        border-radius: 34px;
+        padding: 36px;
         background:
-          linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 252, 246, 0.94)),
-          linear-gradient(135deg, rgba(214, 122, 56, 0.08), rgba(22, 50, 79, 0.03));
+          linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 251, 245, 0.98)),
+          linear-gradient(135deg, rgba(214, 122, 56, 0.08), rgba(23, 50, 76, 0.03));
         box-shadow: var(--shadow);
       }
 
       .hero::after {
         content: "";
         position: absolute;
-        width: 320px;
-        height: 320px;
-        right: -80px;
-        top: -80px;
+        width: 420px;
+        height: 420px;
+        right: -100px;
+        top: -120px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(214, 122, 56, 0.22), transparent 66%);
+        background: radial-gradient(circle, rgba(214, 122, 56, 0.2), transparent 70%);
         pointer-events: none;
       }
 
@@ -77,7 +66,7 @@
         gap: 10px;
         padding: 8px 14px;
         border-radius: 999px;
-        border: 1px solid rgba(22, 50, 79, 0.14);
+        border: 1px solid rgba(23, 50, 76, 0.12);
         background: rgba(255, 255, 255, 0.72);
         color: var(--muted);
         font-size: 13px;
@@ -86,319 +75,433 @@
       }
 
       h1 {
-        margin: 16px 0 14px;
-        max-width: 760px;
-        font-size: clamp(2.8rem, 6vw, 5.6rem);
+        margin: 16px 0 10px;
+        max-width: 860px;
+        font-size: clamp(2.8rem, 6vw, 5.7rem);
         line-height: 0.94;
         letter-spacing: -0.04em;
       }
 
-      .hero-copy {
-        max-width: 780px;
-        font-size: 1.08rem;
-        color: var(--muted);
-      }
-
-      .hero-copy p {
-        margin: 0 0 12px;
-      }
-
-      .cta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 20px;
-      }
-
+      .subhead { max-width: 860px; color: var(--muted); font-size: 1.1rem; }
+      .subhead p { margin: 0 0 12px; }
+      .action-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
       .button {
         display: inline-block;
         padding: 13px 18px;
         border-radius: 999px;
+        text-decoration: none;
         border: 1px solid var(--ink);
         background: var(--ink);
         color: #fff;
-        text-decoration: none;
         font-weight: 700;
       }
 
-      .button.secondary {
-        background: transparent;
-        color: var(--ink);
-      }
-
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 28px;
-      }
-
-      .stat {
-        border-radius: 24px;
+      .button.secondary { background: transparent; color: var(--ink); }
+      .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+      .metric { border-radius: 22px; border: 1px solid var(--line); background: rgba(255, 252, 247, 0.84); padding: 18px; }
+      .metric strong { display: block; font-size: 2rem; line-height: 1; margin-bottom: 8px; }
+      .metric span { color: var(--muted); }
+      .layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; margin-top: 30px; }
+      .toc {
+        position: sticky;
+        top: 20px;
+        align-self: start;
         border: 1px solid var(--line);
-        background: rgba(255, 252, 246, 0.82);
-        padding: 18px;
-      }
-
-      .stat strong {
-        display: block;
-        font-size: 2rem;
-        line-height: 1;
-        margin-bottom: 8px;
-      }
-
-      .stat span {
-        color: var(--muted);
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: 290px minmax(0, 1fr);
-        gap: 28px;
-        margin-top: 28px;
-      }
-
-      .toc-card,
-      .content-card,
-      .note-card {
         border-radius: 28px;
-        border: 1px solid var(--line);
+        padding: 22px;
         background: var(--card);
         box-shadow: var(--shadow);
       }
 
-      .toc-card {
-        position: sticky;
-        top: 20px;
-        padding: 22px;
-      }
-
-      .toc-card h2,
-      .content-card h2,
-      .note-card h2 {
+      .toc h2, .chapter h2, .panel h2 {
         margin: 0 0 14px;
-        font-size: 1.05rem;
+        font-size: 1rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .toc-card ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .toc-card li + li {
-        margin-top: 10px;
-      }
-
-      .toc-card a {
-        text-decoration: none;
-        color: var(--muted);
-      }
-
-      .content-card {
-        padding: 30px;
-      }
-
-      .content-card h3 {
-        margin: 28px 0 10px;
-        font-size: 1.4rem;
-        line-height: 1.15;
-      }
-
-      .content-card p {
-        margin: 0 0 16px;
-      }
-
-      .bullet-list {
-        margin: 0 0 18px;
-        padding-left: 20px;
-      }
-
-      .bullet-list li + li {
-        margin-top: 8px;
-      }
-
-      .note-card {
-        margin-top: 22px;
-        padding: 24px;
-      }
-
-      .footer {
-        padding-top: 22px;
-        color: var(--muted);
-        font-size: 0.96rem;
-      }
-
-      .map-wrap {
-        margin-top: 22px;
-        display: grid;
-        gap: 22px;
-      }
-
-      .map-card {
-        border-radius: 24px;
+      .toc ul { list-style: none; padding: 0; margin: 0; }
+      .toc li + li { margin-top: 9px; }
+      .toc a { text-decoration: none; color: var(--muted); }
+      .content { min-width: 0; }
+      .chapter, .panel {
         border: 1px solid var(--line);
-        background: rgba(255, 252, 246, 0.84);
-        padding: 20px;
+        border-radius: 30px;
+        padding: 30px;
+        background: var(--card);
+        box-shadow: var(--shadow);
       }
 
-      .map-card h3 {
-        margin-top: 0;
+      .chapter + .chapter, .chapter + .panel, .panel + .chapter, .panel + .panel { margin-top: 22px; }
+      .chapter h3, .panel h3 { margin: 28px 0 10px; font-size: 1.46rem; line-height: 1.15; }
+      p { margin: 0 0 16px; }
+      .lead { font-size: 1.06rem; }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+      .chip {
+        display: inline-block;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(214, 122, 56, 0.22);
+        color: var(--deep);
+        font-size: 0.92rem;
       }
 
-      .map-frame {
-        min-height: 420px;
+      .takeaway {
+        border-left: 4px solid var(--accent);
+        background: rgba(214, 122, 56, 0.08);
+        padding: 16px 18px;
+        border-radius: 16px;
+        margin: 18px 0 4px;
       }
 
-      .map-caption {
-        margin-top: 14px;
-        color: var(--muted);
-        font-size: 0.96rem;
-      }
+      .takeaway strong { display: block; margin-bottom: 8px; }
+      .bullet-list { margin: 0 0 18px; padding-left: 20px; }
+      .bullet-list li + li { margin-top: 8px; }
+      .matrix-wrap { overflow-x: auto; margin-top: 18px; }
+      table { width: 100%; border-collapse: collapse; min-width: 900px; }
+      th, td { border-bottom: 1px solid var(--line); padding: 12px 10px; text-align: left; vertical-align: top; font-size: 0.96rem; }
+      th { position: sticky; top: 0; background: #fbf7f0; font-size: 0.88rem; letter-spacing: 0.05em; text-transform: uppercase; }
+      .mini { color: var(--muted); font-size: 0.92rem; }
+      .map-box { border-radius: 24px; border: 1px solid var(--line); background: rgba(255, 252, 247, 0.84); padding: 20px; }
+      .map-box + .map-box { margin-top: 18px; }
+      .map-frame { min-height: 420px; }
+      .refs { margin: 0; padding-left: 20px; }
+      .refs li + li { margin-top: 10px; }
+      .footer { padding-top: 22px; color: var(--muted); font-size: 0.96rem; }
 
-      code {
-        font-family: Consolas, "Courier New", monospace;
-        font-size: 0.95em;
-      }
-
-      @media (max-width: 920px) {
-        .stats,
-        .grid {
-          grid-template-columns: 1fr;
-        }
-
-        .toc-card {
-          position: static;
-        }
+      @media (max-width: 960px) {
+        .metrics, .layout { grid-template-columns: 1fr; }
+        .toc { position: static; }
       }
     </style>
   </head>
   <body>
-    <div class="shell">
+    <div class="page">
       <section class="hero">
-        <div class="eyebrow">GitHub Ebook · HTML Edition</div>
+        <div class="eyebrow">Version 2 · HTML Ebook</div>
         <h1>Autism Caregiving</h1>
-        <div class="hero-copy">
+        <div class="subhead">
           <p>
-            This repository now uses a direct HTML website for the GitHub ebook edition instead of a Python-generated live page.
+            Version 2 turns the project into a chapter-based HTML ebook with a clearer academic structure, a source matrix, mapped study geography, practical recommendations, and explicit limitations.
           </p>
           <p>
-            The page presents the research synthesis, keeps the downloadable ebook files, and is easy to edit directly on GitHub through <code>docs/index.html</code>.
-          </p>
-          <p>
-            Published for <strong>muszyolo</strong> as a public GitHub Pages project.
+            The synthesis is based on the same 21 papers provided for the project, with strongest coverage from South Africa and Brazil and smaller representation from Chile and Italy.
           </p>
         </div>
-        <div class="cta-row">
+        <div class="action-row">
           <a class="button" href="autism_caregiving_ebook.pdf">Download PDF</a>
           <a class="button secondary" href="autism_caregiving_ebook.epub">Download EPUB</a>
           <a class="button secondary" href="https://github.com/muszyolo/autism-caregiving-ebook">Open Repository</a>
         </div>
-        <div class="stats">
-          <div class="stat">
-            <strong>21</strong>
-            <span>research sources synthesized into the ebook</span>
-          </div>
-          <div class="stat">
-            <strong>HTML</strong>
-            <span>standalone source for the live GitHub ebook page</span>
-          </div>
-          <div class="stat">
-            <strong>3</strong>
-            <span>ways to read it: web, PDF, and EPUB</span>
-          </div>
+        <div class="metrics">
+          <div class="metric"><strong>21</strong><span>source papers included</span></div>
+          <div class="metric"><strong>4</strong><span>main study geographies represented</span></div>
+          <div class="metric"><strong>6</strong><span>major caregiver themes synthesized</span></div>
+          <div class="metric"><strong>V2</strong><span>expanded structure for literature review use</span></div>
         </div>
       </section>
 
-      <div class="grid">
-        <aside class="toc-card">
+      <div class="layout">
+        <aside class="toc">
           <h2>Contents</h2>
           <ul>
-            <li><a href="#about">About This GitHub Ebook</a></li>
-            <li><a href="#inside">What’s Inside</a></li>
-            <li><a href="#themes">Main Themes</a></li>
-            <li><a href="#files">Project Files</a></li>
-            <li><a href="#notes">Publishing Notes</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#method">Scope and Method</a></li>
+            <li><a href="#matrix">Source Matrix</a></li>
+            <li><a href="#themes">Thematic Findings</a></li>
+            <li><a href="#maps">Study Maps</a></li>
+            <li><a href="#discussion">Discussion</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#limitations">Limitations</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+            <li><a href="#references">References</a></li>
           </ul>
         </aside>
 
-        <main>
-          <section id="about" class="content-card">
-            <h2>About This GitHub Ebook</h2>
-            <p>
-              This HTML page is the live front door for the <em>Autism Caregiving</em> ebook. It is based on the source synthesis already prepared from the 21 provided journal articles on autism caregiving, family burden, resilience, service access, and caregiver-mediated intervention.
+        <main class="content">
+          <section id="overview" class="chapter">
+            <h2>Overview</h2>
+            <p class="lead">
+              This ebook examines autism caregiving through a curated set of 21 papers focused mainly on family experience, burden, coping, intervention, and service access. The central claim of the synthesis is that autism support systems cannot be evaluated only through child outcomes; caregiver wellbeing and capability are equally structural.
             </p>
+            <div class="chips">
+              <span class="chip">diagnostic journey</span>
+              <span class="chip">caregiver burden</span>
+              <span class="chip">coping and resilience</span>
+              <span class="chip">service access</span>
+              <span class="chip">family roles</span>
+              <span class="chip">caregiver-mediated intervention</span>
+            </div>
             <p>
-              The goal of this version is simplicity. Instead of relying on Python code to regenerate the site, the GitHub Pages version is now directly editable as HTML, which makes maintenance easier and keeps the ebook site lightweight.
+              Compared with version 1, this edition is more explicit about how the evidence was grouped, where the evidence comes from, what the strongest repeated patterns are, and where the collection remains weak or uneven.
             </p>
-
-            <h3 id="inside">What’s Inside</h3>
-            <ul class="bullet-list">
-              <li>A live GitHub Pages website in pure HTML.</li>
-              <li>A downloadable PDF version of the ebook.</li>
-              <li>A downloadable EPUB version for ebook readers.</li>
-              <li>A source manuscript preserved in the repository.</li>
-            </ul>
-
-            <h3 id="themes">Main Themes</h3>
-            <p>
-              The ebook centers on caregiver journeys before diagnosis, family restructuring, emotional burden, coping and resilience, service gaps, and the role of caregiver-mediated intervention. It also keeps a source-notes structure so the synthesis remains visibly linked to the underlying articles.
-            </p>
-            <p>
-              The website is intentionally concise, while the downloadable ebook files retain the longer reading format.
-            </p>
-
-            <h3 id="files">Project Files</h3>
-            <p>The key files for this HTML-based GitHub ebook are:</p>
-            <ul class="bullet-list">
-              <li><code>docs/index.html</code> for the live website.</li>
-              <li><code>docs/autism_caregiving_ebook.pdf</code> for the PDF download.</li>
-              <li><code>docs/autism_caregiving_ebook.epub</code> for the EPUB download.</li>
-              <li><code>output/ebook/autism_caregiving_ebook.md</code> for the manuscript text.</li>
-            </ul>
-
-            <h3>World Mapping of the Paper Set</h3>
-            <p>
-              The maps below visualize the geography of the papers in this ebook collection. They show where the studies were based or led, which makes them useful for seeing the regional spread of the evidence. They do <strong>not</strong> represent global autism prevalence.
-            </p>
-
-            <div class="map-wrap">
-              <div class="map-card">
-                <h3>Map 1. Study Geography by Paper Count</h3>
-                <div id="autism-paper-map" class="map-frame"></div>
-                <p class="map-caption">
-                  Country counts are based on the source set used for this GitHub ebook. South Africa and Brazil dominate the collection, with Chile and Italy also represented.
-                </p>
-              </div>
-
-              <div class="map-card">
-                <h3>Map 2. Research Focus by Region</h3>
-                <div id="autism-theme-map" class="map-frame"></div>
-                <p class="map-caption">
-                  This view summarizes the main autism-related caregiving themes from each region, such as caregiver burden, intervention access, diagnosis timing, resilience, telerehabilitation, and family adaptation.
-                </p>
-              </div>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              Autism caregiving emerges in this source set as a family systems issue, a service design issue, and a mental health issue, not only a child-development issue.
             </div>
           </section>
 
-          <section id="notes" class="note-card">
-            <h2>Publishing Notes</h2>
+          <section id="method" class="chapter">
+            <h2>Scope and Method</h2>
             <p>
-              GitHub Pages is serving this project from the <code>master</code> branch using the <code>docs/</code> folder. Because the page is now standalone HTML, future edits can be made directly in the repository without rebuilding the site through Python.
+              The ebook is a structured thematic synthesis of the 21 PDF sources supplied for the project. Sources were read for title-level focus, abstract or introductory framing, reported methods, and conclusion-level findings where available. The set includes qualitative studies, reviews, cross-sectional surveys, and intervention-focused papers.
             </p>
             <p>
-              If you want the next step, I can also convert the long manuscript itself into a fully hand-written multi-section HTML ebook page instead of keeping the current site as a front page with downloads.
+              Most papers are caregiver-centered. One paper, SAC20, is a clinical case on PCDH19-related epilepsy with autistic features and was retained only as a peripheral background source rather than a core caregiver-evidence paper.
             </p>
+            <ul class="bullet-list">
+              <li>Countries represented: Brazil, South Africa, Chile, and Italy.</li>
+              <li>Dominant regions: Brazil and South Africa.</li>
+              <li>Dominant methods: qualitative studies, scoping or integrative reviews, and cross-sectional caregiver surveys.</li>
+              <li>Core unit of analysis: caregiver and family experience rather than prevalence estimation.</li>
+            </ul>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              The collection is good for thematic synthesis about caregiving experience and support, but not suitable for a balanced worldwide prevalence argument.
+            </div>
+          </section>
+
+          <section id="matrix" class="panel">
+            <h2>Source Matrix</h2>
+            <p class="mini">
+              This table is designed for literature review work. It compresses each paper into a usable study profile.
+            </p>
+            <div class="matrix-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Paper</th>
+                    <th>Country</th>
+                    <th>Design</th>
+                    <th>Main Focus</th>
+                    <th>Use in V2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>SAC1</td><td>South Africa</td><td>Pilot intervention study</td><td>Caregiver-mediated intervention and JERI outcome detection</td><td>Intervention evidence</td></tr>
+                  <tr><td>SAC2</td><td>Brazil</td><td>Qualitative family study</td><td>Family care experience and diagnosis acceptance</td><td>Diagnostic journey and family roles</td></tr>
+                  <tr><td>SAC3</td><td>Brazil</td><td>Systematic review</td><td>Family challenges and coping strategies</td><td>Core synthesis anchor</td></tr>
+                  <tr><td>SAC4</td><td>South Africa</td><td>Qualitative lived-experience study</td><td>Parent experiences, stigma, coping, and support</td><td>Burden and resilience</td></tr>
+                  <tr><td>SAC5</td><td>Italy</td><td>Cross-sectional caregiver study</td><td>Burden, resilience, guilt, and support</td><td>Burden and resilience nuance</td></tr>
+                  <tr><td>SAC6</td><td>Brazil</td><td>Qualitative narrative study</td><td>Impact of parenting a child with autism</td><td>Family restructuring</td></tr>
+                  <tr><td>SAC7</td><td>Brazil</td><td>Cross-sectional caregiver study</td><td>Behavior and occupational performance during COVID-19</td><td>Pandemic context</td></tr>
+                  <tr><td>SAC8</td><td>Brazil</td><td>Integrative review</td><td>Family experiences, resilience, sibling and support themes</td><td>Broader synthesis support</td></tr>
+                  <tr><td>SAC9</td><td>Brazil</td><td>Comparative cross-sectional study</td><td>Parental emotions and practical care burden</td><td>Emotional burden evidence</td></tr>
+                  <tr><td>SAC10</td><td>South Africa</td><td>Scoping review</td><td>Caregiving during COVID-19</td><td>Crisis and systems strain</td></tr>
+                  <tr><td>SAC11</td><td>South Africa</td><td>Qualitative interview study</td><td>Expectations of caregivers of non-verbal autistic children</td><td>Rural service gaps</td></tr>
+                  <tr><td>SAC12</td><td>Brazil</td><td>Cross-sectional caregiver study</td><td>Burden and oral health</td><td>Daily-care burden</td></tr>
+                  <tr><td>SAC13</td><td>South Africa</td><td>Qualitative professional study</td><td>Telerehabilitation for autistic children</td><td>Service delivery implications</td></tr>
+                  <tr><td>SAC14</td><td>Chile</td><td>Caregiver survey</td><td>First concerns and age of diagnosis</td><td>Diagnosis timing evidence</td></tr>
+                  <tr><td>SAC15</td><td>South Africa</td><td>Cross-sectional stakeholder study</td><td>Interventions for primary caregivers</td><td>Service design critique</td></tr>
+                  <tr><td>SAC16</td><td>South Africa</td><td>Caregiver mealtime study</td><td>Feeding and mealtime experiences</td><td>Daily-life caregiving texture</td></tr>
+                  <tr><td>SAC17</td><td>South Africa</td><td>Clinical-demographic study</td><td>Sexual behavior concerns in children with ASD</td><td>Peripheral caregiver concern area</td></tr>
+                  <tr><td>SAC18</td><td>South Africa</td><td>Qualitative parent study</td><td>Parents' journey and communication challenges</td><td>Family partnership model</td></tr>
+                  <tr><td>SAC19</td><td>Brazil</td><td>Caregiver burden study</td><td>Family burden in autism and language disorders</td><td>Burden comparison</td></tr>
+                  <tr><td>SAC20</td><td>Chile</td><td>Clinical case</td><td>PCDH19 epilepsy with autistic features</td><td>Peripheral background</td></tr>
+                  <tr><td>SAC21</td><td>Brazil</td><td>Cluster analysis</td><td>Parental styles and coparenting</td><td>Family roles and coparenting</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section id="themes" class="chapter">
+            <h2>Thematic Findings</h2>
+
+            <h3>1. Diagnostic Journey and the Pre-Diagnosis Burden</h3>
+            <p>
+              A repeated pattern across SAC2, SAC3, SAC4, SAC14, and SAC18 is that the caregiver journey starts before formal diagnosis. Parents and caregivers often detect differences early, but interpretation is unstable and professional guidance is delayed. Families oscillate between uncertainty, hope, confusion, and self-blame while waiting for diagnostic confirmation.
+            </p>
+            <p>
+              In SAC14, the delay between first concern and diagnosis is especially clear. SAC2 and SAC4 show how that delay is experienced emotionally: caregivers interpret unusual behavior as personality, developmental variation, or something temporary before autism is fully acknowledged.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              Diagnosis in this literature is not a single event. It is a prolonged caregiving phase, and delay itself functions as a burden multiplier.
+            </div>
+
+            <h3>2. Family Restructuring and Uneven Care Roles</h3>
+            <p>
+              SAC2, SAC6, SAC18, and SAC21 show that autism care reorganizes family life. Mothers frequently become the central caregivers, while fathers are less represented or occupy secondary positions in both practice and research. SAC21 pushes back against mother-only framing by showing that parenting style and coparenting quality matter for family functioning.
+            </p>
+            <p>
+              The family changes described in these studies are not abstract. They affect work, education, intimacy, time allocation, social participation, communication patterns, and future planning. In other words, caregiving shifts the architecture of everyday life.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              Caregiver support should not assume a single isolated parent. Family role distribution and coparenting quality are central variables.
+            </div>
+
+            <h3>3. Burden, Stress, and Emotional Load</h3>
+            <p>
+              SAC3, SAC5, SAC9, SAC12, and SAC19 provide the strongest direct evidence on burden. Together they show that caregiver burden is both emotional and practical. It is tied to child behavior, daily care intensity, service scarcity, financial constraints, and the cumulative labor of coordination.
+            </p>
+            <p>
+              SAC9 adds useful specificity by linking parental emotions to daily care practices such as tooth brushing responsibilities. SAC12 shows how burden spills into routine health tasks, while SAC5 suggests resilience reduces burden more clearly than guilt explains it.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              Caregiver burden in this set is not merely subjective distress. It is structurally produced through repeated care demands and weak support systems.
+            </div>
+
+            <h3>4. Coping, Resilience, and Adaptive Strategies</h3>
+            <p>
+              The collection is not only deficit-oriented. SAC4, SAC8, SAC18, and SAC21 show caregivers as active adapters who create routines, build networks, reinterpret progress, and draw strength from support, faith, and practical learning. SAC8 is especially important because it highlights sibling relationships, support networks, and resilience rather than only overload.
+            </p>
+            <p>
+              Still, the evidence does not justify romanticizing resilience. Families appear most resilient when they receive information, social support, and intervention that respects local realities.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              Resilience appears in the papers as an outcome of support and adaptation, not as a substitute for support.
+            </div>
+
+            <h3>5. Services, Access, and System Failure</h3>
+            <p>
+              SAC3, SAC10, SAC11, SAC13, SAC14, and SAC15 show that many caregiver difficulties originate in service ecosystems rather than solely in autism-related features themselves. Recurring barriers include delayed diagnosis, weak information-sharing, poor public awareness, school scarcity, travel burden, and fragmented support.
+            </p>
+            <p>
+              SAC11 is particularly valuable for showing how rural caregivers in KwaZulu-Natal frame education and service access. SAC15 is one of the strongest intervention-design critiques because it shows that caregiver interventions often remain child-centered and fail to address caregiver quality of life directly.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              The literature repeatedly points to systems problems. Caregiver strain often reflects institutional gaps as much as family-level strain.
+            </div>
+
+            <h3>6. Caregiver-Mediated Intervention and Partnership Models</h3>
+            <p>
+              SAC1, SAC13, and SAC18 collectively support a partnership model of care. SAC1 suggests caregiver-mediated intervention can produce measurable signals of change, though brief intervention periods may be insufficient. SAC13 shows the possibilities and limits of telerehabilitation, while SAC18 emphasizes the importance of family partnership in communication support.
+            </p>
+            <p>
+              These studies point toward a model where caregivers are not passive recipients of expert guidance but co-participants in intervention and generalization.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              The best-supported intervention model in this source set is collaborative, context-sensitive, and caregiver-facing rather than professionally isolated.
+            </div>
+          </section>
+
+          <section id="maps" class="panel">
+            <h2>Study Maps</h2>
+            <p class="mini">
+              These maps show where the evidence in the ebook comes from and which caregiving themes dominate by region. They visualize study geography, not autism prevalence.
+            </p>
+            <div class="map-box">
+              <h3>Map 1. Study Geography by Paper Count</h3>
+              <div id="autism-paper-map" class="map-frame"></div>
+            </div>
+            <div class="map-box">
+              <h3>Map 2. Research Focus by Region</h3>
+              <div id="autism-theme-map" class="map-frame"></div>
+            </div>
+          </section>
+
+          <section id="discussion" class="chapter">
+            <h2>Discussion</h2>
+            <p>
+              The strongest contribution of this source set is not breadth of geography but consistency of pattern. Across countries and study types, autism caregiving is repeatedly described as emotionally demanding, structurally under-supported, and deeply embedded in everyday family labor. The sources also suggest that professional systems often rely on caregiver effort without adequately recognizing caregiver wellbeing as an outcome in its own right.
+            </p>
+            <p>
+              A second important pattern is that the literature remains uneven. Mothers are often foregrounded. Fathers, grandparents, and siblings are present but less systematically studied. Rural contexts appear in important but limited ways. Pandemic-era work opened useful insights into crisis conditions, but more longitudinal evidence would help clarify which patterns persist beyond emergency settings.
+            </p>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              The evidence base supports a move from child-only service logic toward family-system and caregiver-capacity logic.
+            </div>
+          </section>
+
+          <section id="recommendations" class="chapter">
+            <h2>Recommendations</h2>
+
+            <h3>For Clinicians</h3>
+            <ul class="bullet-list">
+              <li>Take first caregiver concern seriously and reduce diagnostic drift.</li>
+              <li>Provide guidance before, during, and after diagnosis, not only at diagnosis.</li>
+              <li>Treat caregiver wellbeing as part of intervention success.</li>
+              <li>Use family partnership approaches in communication, feeding, and home routines.</li>
+            </ul>
+
+            <h3>For Policymakers and Service Planners</h3>
+            <ul class="bullet-list">
+              <li>Expand caregiver-facing support, not only child-facing services.</li>
+              <li>Improve school access and referral pathways, especially in under-resourced areas.</li>
+              <li>Support remote and hybrid service models without assuming digital access is equal.</li>
+              <li>Build multilingual and culturally responsive caregiver information systems.</li>
+            </ul>
+
+            <h3>For Families and Community Groups</h3>
+            <ul class="bullet-list">
+              <li>Strengthen peer support and shared knowledge networks.</li>
+              <li>Include fathers, grandparents, and siblings more deliberately in support design.</li>
+              <li>Recognize coping and adaptation without normalizing exhaustion.</li>
+            </ul>
+
+            <h3>For Researchers</h3>
+            <ul class="bullet-list">
+              <li>Study underrepresented caregivers and broader family systems.</li>
+              <li>Expand evidence from rural and low-resource contexts.</li>
+              <li>Improve reporting of intervention intensity, feasibility, and sustainability.</li>
+              <li>Use longitudinal designs to separate temporary crisis effects from durable patterns.</li>
+            </ul>
+          </section>
+          <section id="limitations" class="chapter">
+            <h2>Limitations</h2>
+            <ul class="bullet-list">
+              <li>The source set is not globally balanced; South Africa and Brazil dominate.</li>
+              <li>Not all papers provide equally clear methods, abstracts, or conclusion details in extraction-friendly form.</li>
+              <li>One source, SAC20, is peripheral to the caregiving focus.</li>
+              <li>The website maps show study geography and topical emphasis, not autism prevalence or burden estimates.</li>
+              <li>The synthesis is interpretive and designed for literature review use, not as a formal meta-analysis.</li>
+            </ul>
+            <div class="takeaway">
+              <strong>Key takeaway</strong>
+              Version 2 is stronger as a thematic and teaching-oriented synthesis than as a definitive global evidence map.
+            </div>
+          </section>
+
+          <section id="conclusion" class="chapter">
+            <h2>Conclusion</h2>
+            <p>
+              Version 2 of the ebook strengthens the central message of the project: autism caregiving should be understood as a relational, structural, and policy-relevant field of care. The source papers show that caregivers do far more than support a child at home. They absorb institutional gaps, coordinate treatment pathways, reorganize family life, and sustain the continuity of intervention.
+            </p>
+            <p>
+              The evidence does not argue for celebrating resilience while ignoring strain. It argues for building systems in which resilience is not demanded as compensation for weak support. In that sense, the most actionable lesson from the paper set is also the simplest: caregiver support is not an optional add-on. It is core autism support.
+            </p>
+          </section>
+
+          <section id="references" class="panel">
+            <h2>References</h2>
+            <ol class="refs">
+              <li>Dawood Z, Sebolai K, Ndlovu M, Viljoen M, Seris N, Shabalala N, De Vries PJ, Franz L, Harty M. Detecting change in a caregiver-mediated autism intervention using the Joint Engagement Rating Inventory. <em>South African Journal of Communication Disorders</em>. 2025. DOI: 10.4102/sajcd.v72i1.1102.</li>
+              <li>Mapelli LD, Barbieri MC, Castro GVDZB, Bonelli MA, Wernet M, Dupas G. Child with autistic spectrum disorder: care from the family. <em>Escola Anna Nery</em>. 2018. DOI: 10.1590/2177-9465-EAN-2018-0116.</li>
+              <li>Gomes PTM, Lima LHL, Bueno MKG, Araújo LA, Souza NM. Autism in Brazil: a systematic review of family challenges and coping strategies. <em>Journal of Pediatrics (Rio J)</em>. 2015. DOI: 10.1016/j.jped.2014.08.009.</li>
+              <li>Reddy G, Fewster DL, Gurayah T. Parents’ voices: experiences and coping as a parent of a child with autism spectrum disorder. <em>South African Journal of Occupational Therapy</em>. 2019. DOI: 10.17159/2310-3833/2019/vol49n1a7.</li>
+              <li>Rizzo A, Sorrenti L, Commendatore M, Mautone A, Caparello C, Maggio MG, Özaslan A, Karaman H, Yıldırım M, Filippello P. Caregivers of Children with Autism Spectrum Disorders: The Role of Guilt Sensitivity and Support. <em>Journal of Clinical Medicine</em>. 2024. DOI: 10.3390/jcm13144249.</li>
+              <li>Aguiar MCM, Pondé MP. Parenting a child with autism. 2019. DOI: 10.1590/0047-2085000000223.</li>
+              <li>Silva MP, Souza RGM, Oliveira KF, Cardoso AA, Magalhães LC. Perception of caregivers of preschool children with ASD on their behavior and occupational performance during the COVID-19 pandemic. 2024. DOI: 10.1590/2526-8910.ctoAO275935902.</li>
+              <li>Anjos BB, Morais NA. Experiences of families with autistic children: an integrative literature review. <em>Ciencias Psicológicas</em>. 2021. DOI: 10.22235/cp.v15i1.2347.</li>
+              <li>Silva GCB, Firmino RT, Nogueira ABD, Massoni ACLT, D’Ávila S. Parental emotions in families of children and adolescents with and without autism spectrum disorder. <em>Brazilian Oral Research</em>. 2024. DOI: 10.1590/1807-3107bor-2024.vol38.0106.</li>
+              <li>Berson J, Adams SN. South African caregivers of children with autism during COVID-19: A scoping review. <em>South African Journal of Communication Disorders</em>. 2024.</li>
+              <li>Haffejee F, Pahl JAH, Karrim SB. Caregivers’ expectations of their non-verbal autistic children in rural KwaZulu-Natal. <em>South African Journal of Communication Disorders</em>. 2024.</li>
+              <li>Falquetti BB, Rodrigues JVS, Paino-Sant’Ana A, Deroide MB, Mulinari-Santos G, Theodoro LH. Impact of the burden of caregivers of children with ASD on oral health. <em>Revista de Odontologia da UNESP</em>. 2023. DOI: 10.1590/1807-2577.03023.</li>
+              <li>Karrim SB, Flack PS, Naidoo U, Beagle S, Pontin A. The experiences of speech-language therapists providing telerehabilitation services to children with autism spectrum disorder. <em>South African Journal of Communication Disorders</em>. 2022. DOI: 10.4102/sajcd.v69i2.917.</li>
+              <li>García R, Irarrázaval M, López I, Riesle S, Cabezas M, Moyano A. Survey for caregivers of people in the autism spectrum in Chile: first concerns, age of diagnosis and clinical characteristics. <em>Andes Pediatrica</em>. 2021. DOI: 10.32641/andespediatr.v92i1.2307.</li>
+              <li>Fewster DL, Uys C, Govender P. Interventions for Primary Caregivers of Children with Autism Spectrum Disorder: A cross-sectional study of current practices of stakeholders in South Africa. <em>South African Journal of Occupational Therapy</em>. 2020. DOI: 10.17159/2310-3833/2020/vol50no1a7.</li>
+              <li>Adams SN, Verachia R, Coutts K. “A blender without the lid on”: Mealtime experiences of caregivers with a child with autism spectrum disorder in South Africa. <em>South African Journal of Communication Disorders</em>. 2020. DOI: 10.4102/sajcd.v67i1.708.</li>
+              <li>Fourie L, Kotzé C, Van der Westhuizen D. Clinical and demographic factors associated with sexual behaviour in children with autism spectrum disorders. <em>South African Journal of Psychiatry</em>. 2017.</li>
+              <li>Alli A, Abdoola S, Mupawose A. Parents’ journey into the world of autism. <em>South African Journal of Child Health</em>. 2015. DOI: 10.7196/SAJCH.7942.</li>
+              <li>Misquiatti ARN, Brito MC, Ferreira FTS, Assumpção Junior FB. Family burden and children with autism spectrum disorders: perspective of caregivers.</li>
+              <li>Venegas Silva V, García Venegas E, Repetto Lisboa MG, Barroso Ramos E, Lapunzina Badia P. Pathogenic variant in the PCDH19 gene in a patient with epilepsy and cognitive disability. <em>Revista Chilena de Pediatría</em>. 2020. DOI: 10.32641/rchped.vi91i5.1490.</li>
+              <li>Portes JRM, Vieira ML, Souza CD, Kaszubowski E. Parental styles and coparenting in families with children with autism: cluster analysis of children’s behavior. <em>Estudos de Psicologia (Campinas)</em>. 2020. DOI: 10.1590/1982-0275202037e190143.</li>
+            </ol>
           </section>
         </main>
       </div>
 
       <div class="footer">
-        Repository: <a href="https://github.com/muszyolo/autism-caregiving-ebook">muszyolo/autism-caregiving-ebook</a>
+        Version 2 HTML ebook for <a href="https://github.com/muszyolo/autism-caregiving-ebook">muszyolo/autism-caregiving-ebook</a>.
       </div>
     </div>
+
     <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
     <script>
       const paperCounts = [
@@ -416,16 +519,16 @@
           size: 26,
           color: "#d67a38",
           label: "Brazil",
-          text: "Nine papers. Major themes: family care, parental emotions, oral health, integrative reviews, adaptation, coparenting."
+          text: "Nine papers. Main themes: family care, parental emotions, oral health, integrative reviews, adaptation, and coparenting."
         },
         {
           country: "South Africa",
           lat: -30.6,
           lon: 22.9,
           size: 26,
-          color: "#16324f",
+          color: "#17324c",
           label: "South Africa",
-          text: "Nine papers. Major themes: caregiver-mediated intervention, COVID-19 impacts, rural caregiver expectations, mealtime stress, telerehabilitation."
+          text: "Nine papers. Main themes: caregiver-mediated intervention, COVID-19 impacts, rural expectations, mealtime stress, and telerehabilitation."
         },
         {
           country: "Chile",
@@ -434,7 +537,7 @@
           size: 18,
           color: "#8a5a44",
           label: "Chile",
-          text: "Two papers. Major themes: caregiver survey findings, diagnostic timing, clinical and family implications."
+          text: "Two papers. Main themes: diagnostic timing, caregiver survey findings, and broader family implications."
         },
         {
           country: "Italy",
@@ -443,7 +546,7 @@
           size: 16,
           color: "#587c6c",
           label: "Italy",
-          text: "One paper. Major themes: caregiver burden, resilience, guilt sensitivity, and support."
+          text: "One paper. Main themes: caregiver burden, resilience, guilt sensitivity, and support."
         }
       ];
 
@@ -459,17 +562,10 @@
             colorscale: [
               [0, "#f6d8c2"],
               [0.5, "#d67a38"],
-              [1, "#16324f"]
+              [1, "#17324c"]
             ],
-            marker: {
-              line: {
-                color: "#f6f1e7",
-                width: 0.6
-              }
-            },
-            colorbar: {
-              title: "Paper count"
-            },
+            marker: { line: { color: "#f5efe4", width: 0.6 } },
+            colorbar: { title: "Paper count" },
             hovertemplate: "%{text}<extra></extra>"
           }
         ],
@@ -505,10 +601,7 @@
             marker: {
               size: themePoints.map((d) => d.size),
               color: themePoints.map((d) => d.color),
-              line: {
-                color: "#fffdf8",
-                width: 1.5
-              },
+              line: { color: "#fffdf8", width: 1.5 },
               opacity: 0.95
             }
           }
